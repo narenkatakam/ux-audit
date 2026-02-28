@@ -5,7 +5,7 @@ This repository uses `AGENTS.md` as the shared instruction entry point for multi
 ## Scope
 
 - Applies to the whole repository.
-- Used when maintaining `skills/ui-ux-agent-skill/SKILL.md`, `README.md`, and reference files.
+- Used when maintaining `skills/ui-ux-agent-skill/SKILL.md`, `README.md`, `docs/`, and reference files.
 
 ## Repository Goals
 
@@ -33,7 +33,7 @@ This repository uses `AGENTS.md` as the shared instruction entry point for multi
 ## Editing Rules
 
 - Keep updates small and coherent; avoid broad rewrites without clear value.
-- When changing `skills/ui-ux-agent-skill/SKILL.md`, ensure `README.md` stays aligned.
+- When changing `skills/ui-ux-agent-skill/SKILL.md`, ensure `README.md` and `docs/` stay aligned.
 - If adding a new rule, include one concrete example or acceptance check.
 - New reference documents should follow the existing pattern: core idea, practical rules, review question.
 
