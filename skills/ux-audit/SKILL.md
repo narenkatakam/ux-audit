@@ -39,6 +39,9 @@ Keep outputs concise. Bullets over paragraphs. Specific over generic.
    - Color: `references/color-systems.md`
    - Navigation: `references/navigation.md`
    - Data visualization: `references/data-visualization.md`
+   - Forms: `references/forms.md`
+   - UI states (empty, loading, error, success): `references/ui-states.md`
+   - Overlays (modals, drawers, popovers, bottom sheets): `references/overlays.md`
 
 ### 2) Review workflow
 
@@ -586,4 +589,7 @@ Before finalizing generated UI, verify these items. Violating any one is a manda
 - Navigation patterns (nav structures, wayfinding, mobile nav): `references/navigation.md`
 - Data visualization (chart selection, data-ink ratio, dashboard design): `references/data-visualization.md`
 - Icon rules and "intuitive refined" guidance: `references/icons.md`
+- Forms (validation, multi-step, field patterns, form a11y): `references/forms.md`
+- UI states (empty, loading, error, success — patterns, decision trees, copy guidance): `references/ui-states.md`
+- Overlays (modals, drawers, popovers, bottom sheets — sizing, focus traps, z-index, decision tree): `references/overlays.md`
 - Review output template, verification gates, and surface-specific checklists: `references/review-template.md`

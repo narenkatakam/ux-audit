@@ -1,6 +1,6 @@
 # Coverage
 
-12 core principles and 10 reference documents, spanning cognitive psychology to CSS spacing scales.
+12 core principles and 13 reference documents, spanning cognitive psychology to CSS spacing scales.
 
 ```mermaid
 flowchart TB
@@ -22,6 +22,9 @@ flowchart TB
         L["Color Systems"]
         M["Navigation"]
         N["Data Viz"]
+        R["UI States"]
+        S["Forms"]
+        T["Overlays"]
     end
 
     subgraph Psych["Psychology"]
@@ -47,6 +50,9 @@ flowchart TB
 | **Data Visualization** | Data-ink ratio, chart type selection, dashboard design, axis/label rules, interaction, formatting | `data-visualization.md` |
 | **Psychology** | Affordances, signifiers, mapping, constraints, conceptual models, feedback, gulfs, slips vs mistakes, Fitts's/Hick's/Miller's Law, cognitive biases, interaction flow, attention economy | `psychology.md` |
 | **Icons** | No-emoji rule, one-family rule, when to use text instead, suggested sets (Lucide, Heroicons, Phosphor), common mappings | `icons.md` |
+| **UI States** | Empty, loading, error, success state patterns, skeleton vs spinner decision tree, error copy patterns, confirmation flows | `ui-states.md` |
+| **Forms** | Validation timing, inline errors, multi-step patterns, field grouping, auto-save, form-specific a11y | `forms.md` |
+| **Overlays** | Modal/drawer/popover/bottom sheet sizing, focus traps, z-index scale, "which overlay?" decision tree | `overlays.md` |
 | **Motion** | Animation purpose, motion vocabulary, canvas stability, red flags, consistency rules | `SKILL.md` |
 
 ---
