@@ -11,12 +11,14 @@ What it was missing: accessibility, responsive design, typography, color systems
 | | Original | This fork |
 |---|---|---|
 | Language | Chinese (docs + demos) | English |
-| Core principles | 8 (A-H) | 12 (A-L) |
-| Reference docs | 6 | 10 |
+| Core principles | 8 (A-H) | 12 (A-L) with do/don't code examples |
+| Reference docs | 6 | 13 (added forms, UI states, overlays) |
+| Component checklists | None | 7 (buttons, cards, tables, forms, modals, nav, dashboards) |
 | Accessibility | Not covered | Full WCAG 2.1 AA guide |
 | Responsive | Not covered | Mobile-first guide |
 | Typography | Not covered | Type scale, pairing, hierarchy |
 | Color | Not covered | Semantic tokens, dark mode, contrast |
 | Navigation | Not covered | Patterns, wayfinding, mobile |
 | Data viz | 4 bullets | Full chart selection + dashboard guide |
-| Total content | ~800 lines | ~3,000 lines |
+| Review template | Basic | Essential/Polish verification, 6 example findings, surface-specific gates |
+| Total content | ~800 lines | ~5,000 lines |
