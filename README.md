@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="ux-audit-git-banner1.jpg" alt="UX Audit banner" />
+</p>
+
 # UX Audit
 
 **Give your AI coding assistant a design eye.**
