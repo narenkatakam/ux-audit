@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Audit Skill — Coverage Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:    #e6ecfc;
+      --card:  #ffffff;
+      --gb:    #f0f3fc;
+      --div:   rgba(44,33,20,0.09);
+      --text:  #1a1511;
+      --dim:   #6b5c4c;
+      --ff:    'IBM Plex Sans', system-ui, sans-serif;
+      --fm:    'IBM Plex Mono', 'SF Mono', monospace;
+      --c0: #0a3cd9;
+      --c1: #b45309;
+      --c2: #166534;
+      --c3: #9f1239;
+      --c4: #b91c1c;
+      --c5: #0f766e;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--ff);
+      background: var(--bg);
+      display: flex;
+      justify-content: center;
+      padding: 48px 20px 64px;
+      min-height: 100vh;
+    }
+
+    /* ── Poster ── */
+    .poster {
+      width: 1400px;
+      max-width: 100%;
+      background: var(--card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow:
+        0 2px 4px rgba(44,33,20,0.05),
+        0 12px 48px rgba(44,33,20,0.13),
+        0 0 0 1px rgba(44,33,20,0.06);
+    }
+
+    /* ── Header ── */
+    .ph {
+      padding: 28px 48px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--div);
+    }
+    .ey {
+      font-family: var(--fm);
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 6px;
+    }
+    h1 {
+      font-size: 26px; font-weight: 700;
+      letter-spacing: -0.02em; color: var(--text);
+    }
+    .ph-r {
+      font-family: var(--fm);
+      font-size: 10.5px; color: var(--dim);
+      text-align: right; line-height: 1.8;
+    }
+
+    /* ── Graph ── */
+    .ga {
+      height: 520px;
+      background: var(--gb);
+      background-image: radial-gradient(circle, rgba(44,33,20,0.048) 1px, transparent 1px);
+      background-size: 26px 26px;
+      border-bottom: 1px solid var(--div);
+      position: relative;
+      overflow: hidden;
+    }
+    #g { width: 100%; height: 100%; display: block; }
+
+    /* Tooltip */
+    #tip {
+      position: absolute; pointer-events: none;
+      background: var(--card); border: 1px solid rgba(44,33,20,0.14);
+      border-radius: 7px; padding: 8px 12px;
+      box-shadow: 0 4px 14px rgba(44,33,20,0.11);
+      max-width: 190px; opacity: 0;
+      transition: opacity 0.1s ease; z-index: 20;
+    }
+    .tc { font-family: var(--fm); font-size: 9px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 3px; }
+    .tn { font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 3px; }
+    .td { font-size: 10.5px; color: var(--dim); line-height: 1.4; }
+    .hint {
+      position: absolute; bottom: 10px; right: 14px;
+      font-family: var(--fm); font-size: 9.5px; color: var(--dim); opacity: 0.4;
+    }
+
+    /* ── Legend ── */
+    .la {
+      padding: 22px 48px 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px 40px;
+    }
+
+    .ch {
+      display: flex; align-items: center; gap: 7px;
+      margin-bottom: 9px;
+    }
+    .cb { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+    .cn { font-size: 10.5px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; }
+
+    .nl { list-style: none; display: flex; flex-direction: column; gap: 2.5px; }
+    .ni { display: flex; align-items: center; gap: 6px; }
+    .nb { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; opacity: 0.65; }
+    .nn { font-size: 11.5px; color: var(--dim); line-height: 1.3; }
+
+    /* ── Footer ── */
+    .pf {
+      padding: 9px 48px;
+      background: rgba(44,33,20,0.022);
+      border-top: 1px solid var(--div);
+      font-family: var(--fm);
+      font-size: 9.5px; color: var(--dim);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .save-btn {
+      font-family: var(--fm); font-size: 9.5px;
+      color: var(--dim); background: none;
+      border: 1px solid var(--div); border-radius: 4px;
+      padding: 3px 9px; cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .save-btn:hover { border-color: rgba(44,33,20,0.3); color: var(--text); }
+  </style>
+</head>
+<body>
+<div class="poster" id="poster">
+
+  <!-- Header -->
+  <div class="ph">
+    <div>
+      <div class="ey">UX Audit Skill · ui-ux-agent-skill</div>
+      <h1>Design Discipline Network</h1>
+    </div>
+    <div class="ph-r">
+      27 disciplines &nbsp;·&nbsp; 28 connections<br>
+      6 discipline clusters<br>
+      hover any node to explore
+    </div>
+  </div>
+
+  <!-- Network graph -->
+  <div class="ga" id="gc">
+    <svg id="g"></svg>
+    <div id="tip">
+      <div class="tc" id="tc"></div>
+      <div class="tn" id="tn"></div>
+      <div class="td" id="td"></div>
+    </div>
+    <div class="hint">hover · drag · scroll to zoom</div>
+  </div>
+
+  <!-- Legend: 3×2 grid, all 27 nodes listed -->
+  <div class="la">
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c0)"></span><span class="cn" style="color:var(--c0)">Visual Design</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">CRAP Principles</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Typography</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Color Systems</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Spacing &amp; Layout</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Motion &amp; Animation</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Modern Minimal Style</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c0)"></span><span class="nn">Icons</span></li>
+      </ul>
+    </div>
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c1)"></span><span class="cn" style="color:var(--c1)">Cognitive Design</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c1)"></span><span class="nn">Cognitive Load Control</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c1)"></span><span class="nn">Affordance &amp; Signifiers</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c1)"></span><span class="nn">Feedback &amp; System Status</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c1)"></span><span class="nn">Psychology &amp; Cognitive Foundations</span></li>
+      </ul>
+    </div>
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c2)"></span><span class="cn" style="color:var(--c2)">Architecture</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c2)"></span><span class="nn">Task-First UX</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c2)"></span><span class="nn">Information Architecture</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c2)"></span><span class="nn">Navigation Patterns</span></li>
+      </ul>
+    </div>
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c3)"></span><span class="cn" style="color:var(--c3)">Interaction Design</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c3)"></span><span class="nn">Error Prevention &amp; Recovery</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c3)"></span><span class="nn">Consistency &amp; Predictability</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c3)"></span><span class="nn">Forms</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c3)"></span><span class="nn">UI States</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c3)"></span><span class="nn">Overlays</span></li>
+      </ul>
+    </div>
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c4)"></span><span class="cn" style="color:var(--c4)">Accessibility</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c4)"></span><span class="nn">WCAG 2.1 AA</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c4)"></span><span class="nn">Responsive Design</span></li>
+      </ul>
+    </div>
+
+    <div class="cg">
+      <div class="ch"><span class="cb" style="background:var(--c5)"></span><span class="cn" style="color:var(--c5)">Audit Process</span></div>
+      <ul class="nl">
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Guide Mode</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Review Mode</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Non-Negotiables</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Component Checklists</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Anti-AI Self-Check</span></li>
+        <li class="ni"><span class="nb" style="background:var(--c5)"></span><span class="nn">Data Visualization</span></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="pf">
+    <span>Coverage map · All disciplines, frameworks, and audit protocols</span>
+    <button class="save-btn" onclick="window.print()">Save / Print</button>
+  </div>
+
+</div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+  const CNAMES = ['Visual Design','Cognitive Design','Architecture','Interaction Design','Accessibility','Audit Process'];
+  const C = ['#0a3cd9','#b45309','#166534','#9f1239','#b91c1c','#0f766e'];
+  const NR = {large:11, medium:8};
+
+  const NODES = [
+    {id:'CRAP Principles',                   cl:0, s:'large',  d:'Contrast, Repetition, Alignment, Proximity — foundation of visual hierarchy'},
+    {id:'Typography',                        cl:0, s:'large',  d:'Type scale, typeface limits, 45–75 char line length, hierarchy clarity'},
+    {id:'Color Systems',                     cl:0, s:'large',  d:'Semantic tokens, intentional palettes, WCAG 4.5:1 text / 3:1 UI contrast'},
+    {id:'Spacing & Layout',                  cl:0, s:'large',  d:'4px base unit scale, proximity grouping, alignment rules, 40–60% whitespace'},
+    {id:'Motion & Animation',                cl:0, s:'medium', d:'State change communication, micro-interactions, hierarchy explanation'},
+    {id:'Modern Minimal Style',              cl:0, s:'medium', d:'Restraint-based design, shadow budget, decoration only with purpose'},
+    {id:'Icons',                             cl:0, s:'medium', d:'Single icon family, correct sizing, no emoji as UI icons'},
+    {id:'Cognitive Load Control',            cl:1, s:'large',  d:'Defaults, progressive disclosure, visual noise reduction, context carrying'},
+    {id:'Affordance & Signifiers',           cl:1, s:'large',  d:'Clickability, visual feedback, focus states, constraint visibility'},
+    {id:'Feedback & System Status',          cl:1, s:'large',  d:'Loading states, error handling, success states, confirmation patterns'},
+    {id:'Psychology & Cognitive Foundations',cl:1, s:'medium', d:"Norman's design laws, cognitive biases, HCI principles"},
+    {id:'Task-First UX',                     cl:2, s:'large',  d:'Primary task focus, CTA hierarchy, progressive disclosure'},
+    {id:'Information Architecture',          cl:2, s:'large',  d:'Mental models, grouping, findability, navigation structure'},
+    {id:'Navigation Patterns',               cl:2, s:'large',  d:'Structural design, wayfinding, mobile navigation patterns'},
+    {id:'Error Prevention & Recovery',       cl:3, s:'large',  d:'Inline validation, destructive action handling, error messaging'},
+    {id:'Consistency & Predictability',      cl:3, s:'large',  d:'Component patterns, stable interactions, component variants'},
+    {id:'Forms',                             cl:3, s:'large',  d:'Validation, multi-step flows, field patterns, accessibility'},
+    {id:'UI States',                         cl:3, s:'medium', d:'Empty, loading, error, success — with decision trees for each'},
+    {id:'Overlays',                          cl:3, s:'medium', d:'Modals, drawers, popovers, bottom sheets, focus management'},
+    {id:'Accessibility WCAG 2.1 AA',         cl:4, s:'large',  d:'Color independence, keyboard navigation, screen readers, aria labels'},
+    {id:'Responsive Design',                 cl:4, s:'large',  d:'Mobile-first, content hierarchy preservation, 44×44px touch targets'},
+    {id:'Guide Mode',                        cl:5, s:'large',  d:"Compact principles + do/don't rules for building modern interfaces"},
+    {id:'Review Mode',                       cl:5, s:'large',  d:'Structured audit with P0/P1/P2 prioritization and implementable fixes'},
+    {id:'Non-Negotiables',                   cl:5, s:'medium', d:'Hard rules: no emoji icons, one icon family, minimize copy, accessible by default'},
+    {id:'Component Checklists',              cl:5, s:'medium', d:'Buttons, cards, tables, forms, modals, navigation, dashboards'},
+    {id:'Anti-AI Self-Check',                cl:5, s:'medium', d:'Protocol to catch AI-generated mediocrity before it ships'},
+    {id:'Data Visualization',               cl:5, s:'medium', d:'Chart selection, data-ink ratio, dashboard design principles'},
+  ];
+
+  const LINKS = [
+    {s:'Typography',                        t:'CRAP Principles'},
+    {s:'Color Systems',                     t:'Accessibility WCAG 2.1 AA'},
+    {s:'Color Systems',                     t:'CRAP Principles'},
+    {s:'Cognitive Load Control',            t:'Information Architecture'},
+    {s:'Psychology & Cognitive Foundations',t:'Cognitive Load Control'},
+    {s:'Psychology & Cognitive Foundations',t:'Affordance & Signifiers'},
+    {s:'Affordance & Signifiers',           t:'Consistency & Predictability'},
+    {s:'Motion & Animation',                t:'Feedback & System Status'},
+    {s:'UI States',                         t:'Feedback & System Status'},
+    {s:'Error Prevention & Recovery',       t:'Forms'},
+    {s:'Error Prevention & Recovery',       t:'Overlays'},
+    {s:'Responsive Design',                 t:'Navigation Patterns'},
+    {s:'Spacing & Layout',                  t:'CRAP Principles'},
+    {s:'Task-First UX',                     t:'Information Architecture'},
+    {s:'Navigation Patterns',               t:'Information Architecture'},
+    {s:'Accessibility WCAG 2.1 AA',         t:'Forms'},
+    {s:'Accessibility WCAG 2.1 AA',         t:'Icons'},
+    {s:'Review Mode',                       t:'CRAP Principles'},
+    {s:'Review Mode',                       t:'Error Prevention & Recovery'},
+    {s:'Review Mode',                       t:'Accessibility WCAG 2.1 AA'},
+    {s:'Component Checklists',              t:'Forms'},
+    {s:'Component Checklists',              t:'Overlays'},
+    {s:'Component Checklists',              t:'Navigation Patterns'},
+    {s:'Data Visualization',               t:'Spacing & Layout'},
+    {s:'Data Visualization',               t:'Color Systems'},
+    {s:'Modern Minimal Style',              t:'Spacing & Layout'},
+    {s:'Non-Negotiables',                   t:'Icons'},
+    {s:'Non-Negotiables',                   t:'Accessibility WCAG 2.1 AA'},
+  ];
+
+  const links = LINKS.map(l => ({source:l.s, target:l.t}));
+
+  const gc = document.getElementById('gc');
+  const W  = gc.offsetWidth;
+  const H  = gc.offsetHeight;
+
+  const svg  = d3.select('#g').attr('viewBox',`0 0 ${W} ${H}`);
+  const defs = svg.append('defs');
+
+  const rg = defs.append('radialGradient').attr('id','rg').attr('cx','50%').attr('cy','50%').attr('r','65%');
+  rg.append('stop').attr('offset','0%').attr('stop-color','#f8faff');
+  rg.append('stop').attr('offset','100%').attr('stop-color','#eef1fa');
+  svg.insert('rect','*').attr('width',W).attr('height',H).attr('fill','url(#rg)');
+
+  // Cluster centres — hexagonal ring
+  const cx = W/2, cy = H/2;
+  const orb = Math.min(W,H) * 0.33;
+  const offsets = [
+    [-0.88,-0.68], [ 0.12,-1.00], [ 0.90,-0.62],
+    [ 0.88, 0.62], [-0.84, 0.62], [ 0.12, 0.90],
+  ];
+  const CC = offsets.map(([dx,dy]) => ({x: cx+orb*dx, y: cy+orb*dy}));
+
+  const nodes = NODES.map(n => ({
+    ...n,
+    x: CC[n.cl].x + (Math.random()-0.5)*50,
+    y: CC[n.cl].y + (Math.random()-0.5)*50,
+  }));
+
+  const root = svg.append('g');
+  svg.call(d3.zoom().scaleExtent([0.5,4]).on('zoom', e => root.attr('transform',e.transform)));
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link',    d3.forceLink(links).id(d=>d.id)
+                        .distance(d => d.source.cl===d.target.cl ? 80 : 130)
+                        .strength(0.3))
+    .force('charge',  d3.forceManyBody().strength(-280))
+    .force('collide', d3.forceCollide(d => NR[d.s]+10))
+    .force('x',       d3.forceX(d => CC[d.cl].x).strength(0.13))
+    .force('y',       d3.forceY(d => CC[d.cl].y).strength(0.13));
+
+  const edge = root.append('g')
+    .selectAll('line').data(links).join('line')
+    .attr('stroke','rgba(44,33,20,0.16)')
+    .attr('stroke-width',0.7)
+    .attr('stroke-linecap','round');
+
+  const node = root.append('g')
+    .selectAll('circle').data(nodes).join('circle')
+    .attr('r', d => NR[d.s])
+    .attr('fill', d => C[d.cl])
+    .attr('fill-opacity',0.86)
+    .attr('stroke','#ffffff')
+    .attr('stroke-width',1.8)
+    .style('cursor','pointer')
+    .call(d3.drag()
+      .on('start',(e,d) => { if(!e.active) sim.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+      .on('drag', (e,d) => { d.fx=e.x; d.fy=e.y; })
+      .on('end',  (e,d) => { if(!e.active) sim.alphaTarget(0); d.fx=null; d.fy=null; })
+    );
+
+  const tip=document.getElementById('tip'),tc=document.getElementById('tc'),tn_=document.getElementById('tn'),td_=document.getElementById('td');
+  const BASE='rgba(44,33,20,0.16)', DIM='rgba(44,33,20,0.04)';
+
+  function reset() {
+    edge.attr('stroke',BASE).attr('stroke-width',0.7);
+    node.attr('fill-opacity',0.86);
+  }
+
+  node
+    .on('mouseenter', function(ev,d) {
+      tc.textContent=CNAMES[d.cl]; tc.style.color=C[d.cl];
+      tn_.textContent=d.id; td_.textContent=d.d;
+      const r=gc.getBoundingClientRect();
+      let tx=ev.clientX-r.left+13, ty=ev.clientY-r.top-10;
+      if(tx+200>W) tx-=215; if(ty<0) ty=6; if(ty+110>H) ty=H-115;
+      tip.style.left=tx+'px'; tip.style.top=ty+'px'; tip.style.opacity='1';
+      const conn=new Set([d.id]);
+      links.forEach(l=>{ if(l.source.id===d.id||l.target.id===d.id){conn.add(l.source.id);conn.add(l.target.id);}});
+      edge.attr('stroke',l=>(l.source.id===d.id||l.target.id===d.id)?C[d.cl]:DIM)
+          .attr('stroke-width',l=>(l.source.id===d.id||l.target.id===d.id)?1.8:0.4);
+      node.attr('fill-opacity',n=>conn.has(n.id)?1:0.14);
+      d3.select(this).raise().transition().duration(120).attr('r',NR[d.s]*1.28);
+    })
+    .on('mousemove', function(ev) {
+      const r=gc.getBoundingClientRect();
+      let tx=ev.clientX-r.left+13,ty=ev.clientY-r.top-10;
+      if(tx+200>W) tx-=215; if(ty<0) ty=6;
+      tip.style.left=tx+'px'; tip.style.top=ty+'px';
+    })
+    .on('mouseleave', function(ev,d) {
+      tip.style.opacity='0'; reset();
+      d3.select(this).transition().duration(120).attr('r',NR[d.s]);
+    });
+
+  svg.on('click', reset);
+
+  sim.on('tick', () => {
+    const pad=20;
+    nodes.forEach(n=>{
+      n.x=Math.max(NR[n.s]+pad, Math.min(W-NR[n.s]-pad, n.x));
+      n.y=Math.max(NR[n.s]+pad, Math.min(H-NR[n.s]-pad, n.y));
+    });
+    edge.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+        .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+    node.attr('cx',d=>d.x).attr('cy',d=>d.y);
+  });
+
+  node.attr('r',0).transition().duration(550).delay((_,i)=>i*14).attr('r',d=>NR[d.s]);
+</script>
+</body>
+</html>
