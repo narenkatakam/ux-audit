@@ -222,6 +222,8 @@ Once installed, just ask naturally:
 
 ## What's Inside
 
+**[Explore the interactive coverage map →](https://narenkatakam.github.io/ux-audit/skill-coverage-map.html)**
+
 ### 12 core principles (SKILL.md)
 
 | | Principle | One-liner |
