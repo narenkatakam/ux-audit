@@ -2,6 +2,13 @@
   <img src="ux-audit-git-banner1.jpg" alt="UX Audit banner" />
 </p>
 
+<p align="center">
+  <a href="https://github.com/narenkatakam/ux-audit/releases"><img src="https://img.shields.io/github/v/release/narenkatakam/ux-audit?style=flat-square&color=0a3cd9" alt="Release"></a>
+  <a href="./LICENSE.txt"><img src="https://img.shields.io/badge/license-Apache%202.0-blue?style=flat-square" alt="License"></a>
+  <a href="https://github.com/narenkatakam/ux-audit/stargazers"><img src="https://img.shields.io/github/stars/narenkatakam/ux-audit?style=flat-square" alt="Stars"></a>
+  <img src="https://img.shields.io/badge/works%20with-Claude%20Code%20·%20Cursor%20·%20Codex%20·%20Windsurf-black?style=flat-square" alt="Works with">
+</p>
+
 # UX Audit
 
 **Give your AI coding assistant a design eye.**

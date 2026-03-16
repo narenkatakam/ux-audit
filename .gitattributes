@@ -1,0 +1,3 @@
+# Fix GitHub language detection — this is a design skill, not a shell project
+install.sh linguist-vendored
+*.sh linguist-vendored
