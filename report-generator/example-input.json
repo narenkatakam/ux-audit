@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "appName": "TaskFlow — Vibe-coded Project Manager",
+    "appUrl": "https://taskflow-demo.vercel.app",
+    "platform": "Web",
+    "targetUser": "Freelancers managing client projects",
+    "primaryTask": "Create and track project tasks",
+    "date": "2026-03-28"
+  },
+  "summary": {
+    "issuePattern": "Visual hierarchy is flat — everything competes for attention, nothing guides the eye to the primary action",
+    "strongestAspect": "Core functionality works. Task creation flow is logical and the data model is sound."
+  },
+  "findings": [
+    {
+      "priority": "P0",
+      "title": "Primary CTA is invisible",
+      "diagnosis": "Gulf of Execution",
+      "evidence": "The 'Add Task' button uses the same gray background as inactive elements. At default viewport (1280px), it blends into the toolbar. No contrast differentiation from secondary actions.",
+      "impact": "All users. The single most important action on the page requires hunting. New users may not find it without exploring every element.",
+      "fix": [
+        "Change 'Add Task' button to a solid accent color (e.g., #0a3cd9) with white text",
+        "Increase button padding to 12px 24px for a larger click target",
+        "Add a subtle shadow (0 1px 3px rgba(0,0,0,0.12)) to lift it from the surface",
+        "Remove competing visual weight from secondary toolbar actions — make them text-only or icon-only"
+      ],
+      "principle": "CRAP: Contrast"
+    },
+    {
+      "priority": "P0",
+      "title": "Emoji used as status indicators",
+      "diagnosis": "Consistency break",
+      "evidence": "Task statuses use emoji: ⏳ (in progress), ✅ (done), ❌ (blocked). These render differently across browsers and OSes. On Windows Chrome, the 'blocked' emoji appears as a thin X that's nearly invisible at 14px.",
+      "impact": "All users on non-Apple platforms. Status is ambiguous or unreadable. Accessibility: screen readers may announce emoji names rather than semantic status.",
+      "fix": [
+        "Replace all emoji status indicators with a single icon set (Lucide recommended — MIT license, consistent style)",
+        "Use: Circle for todo, Loader for in-progress, CheckCircle for done, XCircle for blocked",
+        "Add an aria-label to each status icon (e.g., aria-label='In Progress')",
+        "Ensure icons have a minimum size of 16px with appropriate color coding"
+      ],
+      "principle": "Affordance & Signifiers"
+    },
+    {
+      "priority": "P0",
+      "title": "No visual hierarchy in task list",
+      "diagnosis": "Cognitive overload",
+      "evidence": "All task rows use identical 14px regular weight text. Task name, assignee, due date, and status all compete at the same visual level. No typographic differentiation between primary content (task name) and metadata.",
+      "impact": "All users. Scanning a list of 20+ tasks requires reading every cell. Users cannot quickly identify which tasks need attention.",
+      "fix": [
+        "Task name: 14px, font-weight 600 (semibold), color #1a1511",
+        "Metadata (assignee, date): 12px, font-weight 400 (regular), color #6b5c4c",
+        "Overdue dates: 12px, font-weight 500, color #b91c1c",
+        "Add 4px vertical gap between task name and metadata row within each task card"
+      ],
+      "principle": "Typography"
+    },
+    {
+      "priority": "P1",
+      "title": "Spacing inconsistency across cards",
+      "diagnosis": "Consistency break",
+      "evidence": "Task cards use 16px internal padding in the list view but 12px in the board view. Gap between cards is 8px in list view and 12px in board view. The inconsistency creates subtle visual noise.",
+      "impact": "Experienced users who switch between views. The interface feels unpolished, reducing trust in the product.",
+      "fix": [
+        "Standardize internal card padding to 16px in all views",
+        "Standardize gap between cards to 12px in all views",
+        "Use a 4px-based spacing scale: 4, 8, 12, 16, 24, 32, 48"
+      ],
+      "principle": "CRAP: Repetition"
+    },
+    {
+      "priority": "P1",
+      "title": "No empty state for new projects",
+      "diagnosis": "Feedback gap",
+      "evidence": "Creating a new project leads to a blank white page with only the project title and an empty task table header. No guidance on what to do next.",
+      "impact": "New users. The blank page feels broken. Users don't know if they need to add tasks, invite members, or configure settings first.",
+      "fix": [
+        "Add an empty state illustration or icon (simple, minimal — a checklist outline)",
+        "Add a clear headline: 'No tasks yet'",
+        "Add a single CTA: 'Create your first task' styled as the primary action",
+        "Optionally add 1-2 lines of context: 'Tasks help you track work. Create one to get started.'"
+      ],
+      "principle": "Feedback & System Status"
+    },
+    {
+      "priority": "P1",
+      "title": "Delete task has no confirmation",
+      "diagnosis": "Gulf of Execution",
+      "evidence": "Clicking the trash icon on a task row immediately deletes it with no confirmation dialog and no undo option. The action is instant and irreversible.",
+      "impact": "All users. Accidental deletion of tasks with notes, comments, and attachments is permanent. High-stakes slip with no recovery path.",
+      "fix": [
+        "Add a confirmation dialog: 'Delete [task name]? This cannot be undone.'",
+        "Frame the dialog around what will be lost: 'This task and its 3 comments will be permanently deleted'",
+        "Preferred: implement undo (5-second toast with 'Undo' action) instead of confirmation — faster and safer"
+      ],
+      "principle": "Error Prevention & Recovery"
+    },
+    {
+      "priority": "P2",
+      "title": "Sidebar navigation lacks active state",
+      "diagnosis": "Gulf of Evaluation",
+      "evidence": "The left sidebar lists projects but the currently selected project has no visual differentiation from the others. Only the main content area changes.",
+      "impact": "Users with multiple projects. Disorientation when switching between projects — 'which project am I looking at?'",
+      "fix": [
+        "Add a left border accent (3px, solid, accent color) on the active project row",
+        "Set active row background to rgba(10, 60, 217, 0.06)",
+        "Use font-weight 600 for active project name vs 400 for inactive"
+      ],
+      "principle": "Consistency & Predictability"
+    },
+    {
+      "priority": "P2",
+      "title": "Decorative gradient on header serves no purpose",
+      "diagnosis": "Cognitive overload",
+      "evidence": "The page header uses a blue-to-purple gradient background that draws attention away from the task list content. The gradient carries no semantic meaning.",
+      "impact": "Low severity individually, but contributes to overall visual noise. The gradient competes with functional elements for attention.",
+      "fix": [
+        "Replace gradient with a flat, light neutral background (#f0f3fc or #ffffff)",
+        "If branding is needed, use a thin 3px accent bar at the top of the page instead"
+      ],
+      "principle": "CRAP: Contrast"
+    }
+  ]
+}

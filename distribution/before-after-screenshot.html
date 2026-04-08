@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UX Audit — Before / After</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #0a0a0a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .label {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #a3a3a3;
+    }
+    .skeleton {
+      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      border-radius: 4px;
+    }
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-12 gap-20">
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 1. DESTRUCTIVE ACTION DIALOG                -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Destructive Action Confirmation</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-8 flex flex-col items-center gap-4">
+          <p class="text-gray-800 text-base">Are you sure you want to delete?</p>
+          <div class="flex gap-3">
+            <button class="px-5 py-2 bg-gray-200 text-gray-700 rounded text-sm">Yes</button>
+            <button class="px-5 py-2 bg-gray-200 text-gray-700 rounded text-sm">No</button>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          No specifics. No consequences. Generic labels. User has no idea what they're about to lose.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6">
+          <h2 class="text-lg font-semibold text-gray-900">Delete "Q4 Report"?</h2>
+          <p class="text-sm text-gray-500 mt-2">
+            This will permanently delete the report and 12 comments. This can't be undone.
+          </p>
+          <div class="flex justify-end gap-3 mt-6">
+            <button class="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium">
+              Cancel
+            </button>
+            <button class="px-4 py-2 rounded-lg bg-red-600 text-white text-sm font-medium">
+              Delete report
+            </button>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Names what's deleted. States consequences. Action-specific labels. Destructive action visually distinct.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 2. FORM VALIDATION                          -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Form Validation</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6">
+          <!-- Error banner at top -->
+          <div class="bg-red-100 border border-red-300 text-red-700 text-xs p-3 rounded mb-4">
+            Error: Please fix the following errors and try again.
+          </div>
+          <div class="space-y-3">
+            <div>
+              <label class="text-sm text-gray-700">Name</label>
+              <input type="text" value="J" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded text-sm">
+            </div>
+            <div>
+              <label class="text-sm text-gray-700">Email</label>
+              <input type="text" value="john@" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded text-sm">
+            </div>
+            <div>
+              <label class="text-sm text-gray-700">Password</label>
+              <input type="text" value="123" class="w-full mt-1 px-3 py-2 border border-gray-300 rounded text-sm">
+            </div>
+            <button class="w-full py-2 bg-blue-500 text-white rounded text-sm mt-2">Submit</button>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Errors shown after submit. Generic banner at top. No indication which field failed. User scrolls back and forth.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6">
+          <div class="space-y-4">
+            <div>
+              <label class="text-sm font-medium text-gray-700">Full name</label>
+              <input type="text" value="J" class="w-full mt-1 px-3 py-2 border-2 border-red-400 rounded-lg text-sm focus:outline-none">
+              <p class="text-xs text-red-500 mt-1 flex items-center gap-1">
+                <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                Name must be at least 2 characters
+              </p>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Email address</label>
+              <input type="text" value="john@" class="w-full mt-1 px-3 py-2 border-2 border-red-400 rounded-lg text-sm focus:outline-none">
+              <p class="text-xs text-red-500 mt-1 flex items-center gap-1">
+                <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                Enter a valid email (e.g. john@company.com)
+              </p>
+            </div>
+            <div>
+              <label class="text-sm font-medium text-gray-700">Password</label>
+              <input type="text" value="123" class="w-full mt-1 px-3 py-2 border-2 border-red-400 rounded-lg text-sm focus:outline-none">
+              <p class="text-xs text-red-500 mt-1 flex items-center gap-1">
+                <svg class="w-3 h-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                At least 8 characters with a number and symbol
+              </p>
+              <!-- Strength meter -->
+              <div class="flex gap-1 mt-2">
+                <div class="h-1 flex-1 rounded bg-red-400"></div>
+                <div class="h-1 flex-1 rounded bg-gray-200"></div>
+                <div class="h-1 flex-1 rounded bg-gray-200"></div>
+                <div class="h-1 flex-1 rounded bg-gray-200"></div>
+              </div>
+              <p class="text-xs text-gray-400 mt-1">Weak</p>
+            </div>
+            <button class="w-full py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium opacity-50 cursor-not-allowed">
+              Create account
+            </button>
+            <p class="text-xs text-gray-400 text-center">Fix 3 errors above to continue</p>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Inline errors at each field. Specific fix instructions. Password strength meter. Submit disabled until valid. Error count shown.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 3. EMPTY STATE                              -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Empty State</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6" style="min-height: 200px;">
+          <!-- Table header with no rows -->
+          <div class="border border-gray-200 rounded">
+            <div class="flex bg-gray-50 border-b border-gray-200 px-4 py-2 text-xs font-medium text-gray-500">
+              <span class="flex-1">Name</span>
+              <span class="w-24">Status</span>
+              <span class="w-24">Date</span>
+              <span class="w-16">Actions</span>
+            </div>
+            <!-- Empty -->
+            <div class="px-4 py-8 text-center text-sm text-gray-400">
+              No data found.
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Blank table with "No data found." Dead end. No guidance on what to do next. Feels broken.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6" style="min-height: 200px;">
+          <div class="flex flex-col items-center justify-center py-6">
+            <!-- Illustration placeholder -->
+            <div class="w-16 h-16 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+              <svg class="w-8 h-8 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/>
+              </svg>
+            </div>
+            <h3 class="text-base font-semibold text-gray-900">No projects yet</h3>
+            <p class="text-sm text-gray-500 mt-1 text-center max-w-xs">
+              Create your first project to start tracking progress and collaborating with your team.
+            </p>
+            <button class="mt-4 px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              New project
+            </button>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Contextual illustration. Explains why it's empty. Clear CTA to fix it. Feels intentional, not broken.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 4. LOADING STATE                            -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Loading State</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6 flex flex-col items-center justify-center" style="min-height: 180px;">
+          <!-- Sad centered spinner -->
+          <div class="w-8 h-8 border-3 border-gray-300 border-t-blue-500 rounded-full spinner" style="border-width: 3px;"></div>
+          <p class="text-sm text-gray-400 mt-3">Loading...</p>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Generic spinner. Layout shift when content arrives. No sense of what's coming. Feels slow.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6" style="min-height: 180px;">
+          <!-- Skeleton that mirrors actual layout -->
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full skeleton"></div>
+            <div class="flex-1">
+              <div class="h-3.5 w-32 skeleton mb-2"></div>
+              <div class="h-2.5 w-20 skeleton"></div>
+            </div>
+          </div>
+          <div class="space-y-3">
+            <div class="h-3 w-full skeleton"></div>
+            <div class="h-3 w-5/6 skeleton"></div>
+            <div class="h-3 w-4/6 skeleton"></div>
+          </div>
+          <div class="flex gap-2 mt-4">
+            <div class="h-8 w-20 skeleton rounded-md"></div>
+            <div class="h-8 w-20 skeleton rounded-md"></div>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Skeleton mirrors real layout. Zero layout shift. User knows what's loading. Perceived speed increases.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 5. ERROR MESSAGE                            -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Error Message</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6 flex flex-col items-center justify-center" style="min-height: 160px;">
+          <p class="text-red-500 text-sm">Error: Something went wrong. Please try again later.</p>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          No explanation of what failed. No recovery path. "Try again later" — when? User is stuck.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6" style="min-height: 160px;">
+          <div class="border border-red-200 bg-red-50 rounded-lg p-4">
+            <div class="flex gap-3">
+              <svg class="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+              </svg>
+              <div>
+                <h3 class="text-sm font-semibold text-red-800">Payment failed</h3>
+                <p class="text-sm text-red-700 mt-1">Your card ending in 4242 was declined. This usually means insufficient funds or an expired card.</p>
+                <div class="flex gap-3 mt-3">
+                  <button class="text-sm font-medium text-red-700 underline underline-offset-2">Update payment method</button>
+                  <button class="text-sm font-medium text-red-700 underline underline-offset-2">Try again</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Says what failed. Explains likely cause. Offers specific recovery actions. User stays in control.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════ -->
+  <!-- 6. TOAST / SUCCESS NOTIFICATION             -->
+  <!-- ════════════════════════════════════════════ -->
+  <section class="w-full max-w-5xl">
+    <p class="section-label text-center mb-6">Success Notification</p>
+    <div class="flex gap-10 w-full">
+
+      <!-- BEFORE -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-red-400/80">Without UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6 flex items-center justify-center" style="min-height: 120px;">
+          <div class="bg-green-500 text-white text-sm px-4 py-2 rounded">
+            Success!
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          "Success!" — of what? No detail. No next step. No undo. Disappears in 3 seconds. User has to trust it worked.
+        </div>
+      </div>
+
+      <!-- ARROW -->
+      <div class="flex items-center pt-6">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#525252" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </div>
+
+      <!-- AFTER -->
+      <div class="flex-1 flex flex-col items-center gap-4">
+        <span class="label text-emerald-400/80">With UX Audit</span>
+        <div class="w-full bg-white rounded-xl shadow-2xl p-6 flex items-center justify-center" style="min-height: 120px;">
+          <div class="w-full bg-white border border-gray-200 rounded-xl shadow-lg p-4 flex items-start gap-3">
+            <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/>
+              </svg>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-gray-900">Invoice #1042 sent</p>
+              <p class="text-xs text-gray-500 mt-0.5">Emailed to sarah@acme.com</p>
+            </div>
+            <button class="text-xs font-medium text-blue-600 flex-shrink-0 mt-0.5">Undo</button>
+            <button class="text-gray-400 flex-shrink-0">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="text-xs text-neutral-500 text-center mt-1 max-w-xs leading-relaxed">
+          Says exactly what happened. Shows who was affected. Undo available. Dismissible. Builds trust.
+        </div>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
