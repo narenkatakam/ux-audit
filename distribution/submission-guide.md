@@ -19,8 +19,8 @@ Submit to these directories and platforms. Each entry is a separate distribution
 
 ### 3. awesome-claude-code
 - **What:** Community list of Claude Code skills, tools, and extensions
-- **URL:** Search GitHub for `awesome-claude-code` (may exist under anthropics org or community)
-- **Submit:** PR adding entry under "Skills" section
+- **URL:** https://github.com/hesreallyhim/awesome-claude-code
+- **Submit:** Open issue with "Recommend a Resource" template from the web UI and complete the form.
 
 ### 4. awesome-mcp-servers (if you build Stage 4b)
 - **What:** Directory of MCP servers
