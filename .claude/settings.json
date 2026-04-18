@@ -1,11 +1,1 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(wc -l /Users/narenkatakam/personal-ventures/experiments/ui-ux-agent-skill/skills/ux-audit/references/*.md)",
-      "Bash(git push)"
-    ],
-    "additionalDirectories": [
-      "/Users/narenkatakam/personal-ventures/experiments/ui-ux-agent-skill/skills/ux-audit"
-    ]
-  }
-}
+{}

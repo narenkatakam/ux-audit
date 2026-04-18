@@ -47,7 +47,6 @@ install_claude_code() {
   fi
   mkdir -p "$TARGET"
   cp -r "$TMPDIR/ux-audit/skills/ux-audit/"* "$TARGET/"
-  cp "$TMPDIR/ux-audit/AGENTS.md" "$TARGET/AGENTS.md"
   ok "Claude Code: installed to $TARGET"
   if [ "$GLOBAL" = true ]; then
     info "Add to your CLAUDE.md: \"Load skills from ~/.claude/skills/ux-audit/SKILL.md\""

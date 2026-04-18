@@ -1,1 +1,14 @@
 .DS_Store
+
+# Internal dev / orientation — never commit to public repo
+ORIENT.md
+
+# Launch / marketing drafts — stay local
+linkedin-launch-*.md
+
+# Report generator output
+audit-report.html
+
+# Distribution assets (large binaries) — use Releases instead
+distribution/*.png
+distribution/*.jpg

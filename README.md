@@ -164,9 +164,17 @@ Load skills from ~/.claude/skills/ux-audit/SKILL.md
 <summary><strong>Cursor</strong></summary>
 
 ```bash
+# From inside the cloned ux-audit directory:
+./install.sh --agent cursor
+```
+
+Or manual, from your target project directory:
+
+```bash
+UXA=/path/to/your/ux-audit/clone
 mkdir -p .cursor/rules
-cp .cursor/rules/ux-audit.mdc .cursor/rules/
-cp -r skills/ AGENTS.md .
+cp "$UXA/.cursor/rules/ux-audit.mdc" .cursor/rules/
+cp -r "$UXA/skills/" "$UXA/AGENTS.md" .
 ```
 
 The rule file loads automatically when Cursor reads your project.
