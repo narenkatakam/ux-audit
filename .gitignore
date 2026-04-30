@@ -12,3 +12,6 @@ audit-report.html
 # Distribution assets (large binaries) — use Releases instead
 distribution/*.png
 distribution/*.jpg
+
+# Claude Code harness config — local-only, do not ship
+.claude/
